@@ -1855,7 +1855,7 @@ class _ChatPage extends State<ChatPage> {
                                     : (Icon(Icons.camera_alt))),
                                 color: Colors.grey,
                                 label: ((_Image1 != null)
-                                    ? (Text('Image1',
+                                    ? (Text('Pic1',
                                     style: TextStyle(fontSize: 12)))
                                     : (Text("Click",
                                     style: TextStyle(fontSize: 12)))),
@@ -1897,7 +1897,7 @@ class _ChatPage extends State<ChatPage> {
                                     : (Icon(Icons.camera_alt))),
                                 color: Colors.grey,
                                 label: ((_Image2 != null)
-                                    ? (Text('Image2',
+                                    ? (Text('Pic2',
                                     style: TextStyle(fontSize: 12)))
                                     : (Text("Click",
                                     style: TextStyle(fontSize: 12)))),
@@ -1939,7 +1939,7 @@ class _ChatPage extends State<ChatPage> {
                                     : (Icon(Icons.camera_alt))),
                                 color: Colors.grey,
                                 label: ((_Image3 != null)
-                                    ? (Text('Image3',
+                                    ? (Text('Pic3',
                                     style: TextStyle(fontSize: 12)))
                                     : (Text("Click",
                                     style: TextStyle(fontSize: 12)))),
@@ -1994,6 +1994,8 @@ class _ChatPage extends State<ChatPage> {
                                 _Image3 = null;
                                 Image3 = null;
                                 _mastTPController.text = "";
+                                _currentValueSelected= null;
+                                _currentValueSelected1= null;
                                 _lineradioValue = null;
                                 _line = null;
                                 _jumper = null;

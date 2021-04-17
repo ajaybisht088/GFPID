@@ -970,7 +970,6 @@ class _SecondPageState extends State<SecondPage> {
                                     });
                                   },
                                   value: _currentValueSelected,
-
                                   //validator: (value) => value == null ? 'field required' : null,
                                 ),
                               ),
@@ -1824,7 +1823,9 @@ class _SecondPageState extends State<SecondPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Container(
+                      Flexible(
+                        flex:1,
+                        child:Container(
                         //   width: 160,
                         height: 80,
                         alignment: Alignment.center,
@@ -1834,7 +1835,7 @@ class _SecondPageState extends State<SecondPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             Container(
-                              alignment: Alignment.centerLeft,
+                             // alignment: Alignment.centerLeft,
                               child: Text(
                                 "Location",
                                 style: TextStyle(
@@ -1864,10 +1865,13 @@ class _SecondPageState extends State<SecondPage> {
                             ),
                           ],
                         ),
-                      ),
+                      ),),
                       VerticalDivider(
                         thickness: 2,
                       ),
+                      Flexible(
+                        flex: 1,
+                        child:
                       Container(
                         //   width: 160,
                         height: 80,
@@ -1878,7 +1882,7 @@ class _SecondPageState extends State<SecondPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             Container(
-                              alignment: Alignment.centerLeft,
+                      //        alignment: Alignment.centerLeft,
                               child: Text(
                                 "OHE",
                                 style: TextStyle(
@@ -1907,9 +1911,13 @@ class _SecondPageState extends State<SecondPage> {
                           ],
                         ),
                       ),
+                      ),
                       VerticalDivider(
                         thickness: 2,
                       ),
+                      Flexible(
+                        flex: 1,
+                        child:
                       Container(
                         //   width: 160,
                         height: 80,
@@ -1920,7 +1928,7 @@ class _SecondPageState extends State<SecondPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             Container(
-                              alignment: Alignment.centerLeft,
+                    //          alignment: Alignment.centerLeft,
                               child: Text(
                                 "Other",
                                 style: TextStyle(
@@ -1948,7 +1956,7 @@ class _SecondPageState extends State<SecondPage> {
                             ),
                           ],
                         ),
-                      ),
+                      ),)
                     ],
                   ),
                 ),
@@ -1997,6 +2005,8 @@ class _SecondPageState extends State<SecondPage> {
                                 _jumper = null;
                                 _jumperradioValue = null;
                                 _signalradioValue = null;
+                                _currentValueSelected= null;
+                                _currentValueSelected1= null;
                                 _signal = null;
                                 _cl = null;
                                 _clradioValue = null;

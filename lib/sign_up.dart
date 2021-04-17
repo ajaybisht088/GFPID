@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 // import 'package:flutter/services.dart';
 import 'database_helper.dart';
 import 'dart:convert';
@@ -25,7 +26,7 @@ class _SignUpPageState extends State<SignUpPage> {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
     encodedAndroidId =
-        stringToBase64.encode(androidInfo.androidId); // encoded android_id
+        stringToBase64.encode(stringToBase64.encode(androidInfo.androidId));
     print(encodedAndroidId);
   }
 
@@ -35,29 +36,30 @@ class _SignUpPageState extends State<SignUpPage> {
         DataBaseHelper.columnName: username_controller.text,
         DataBaseHelper.columnPassword: password_controller.text,
         DataBaseHelper.columnEmail: email_controller.text,
-        DataBaseHelper.columnSecretKey:
-        stringToBase64.decode(secretkey_controller.text),
+        DataBaseHelper.columnSecretKey: stringToBase64
+            .decode(stringToBase64.decode(secretkey_controller.text)),
       };
       userUpdates = await db_helper.insert(row);
       print(userUpdates);
-      if(userUpdates == 'updated') {
+      if (userUpdates == 'updated') {
         userUpdates = "User ${username_controller.text} Updated";
-        username_controller.text= "";
+        username_controller.text = "";
         password_controller.text = "";
         email_controller.text = "";
         secretkey_controller.text = "";
         _showInfo(context);
       }
-      if(userUpdates == 'created') {
+      if (userUpdates == 'created') {
         userUpdates = "User ${username_controller.text} Created";
-        username_controller.text= "";
+        username_controller.text = "";
         password_controller.text = "";
         email_controller.text = "";
         secretkey_controller.text = "";
         _showInfo(context);
       }
+    } catch (e) {
+      _showWrongKeyPopUp(context);
     }
-    catch (e) {_showWrongKeyPopUp(context);}
   }
 
   void queryall() async {
@@ -110,8 +112,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     // enabled: false,
                     controller: username_controller,
                     decoration: InputDecoration(
-                      prefixIcon:
-                      Icon(Icons.account_circle,),
+                      prefixIcon: Icon(
+                        Icons.account_circle,
+                      ),
                       labelText: "Username",
                       //labelStyle: TextStyle(color: Colors.white),
                       focusColor: Color(0xFF204C97),
@@ -119,14 +122,12 @@ class _SignUpPageState extends State<SignUpPage> {
                       fillColor: Colors.white70,
                       // hintStyle: TextStyle(color: Colors.white10),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(40.0)),
-                        borderSide: BorderSide(
-                            color: Color(0xFF204C97), width: 2),
+                        borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                        borderSide:
+                            BorderSide(color: Color(0xFF204C97), width: 2),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(40.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(40.0)),
                         borderSide: BorderSide(
                             color: Colors.blueGrey.shade400, width: 2),
                       ),
@@ -143,23 +144,22 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: password_controller,
                     decoration: InputDecoration(
                       // icon: Icon(Icons.account_circle),
-                      prefixIcon: Icon(Icons.vpn_key, ),
+                      prefixIcon: Icon(
+                        Icons.vpn_key,
+                      ),
                       labelText: "Password",
                       // labelStyle: TextStyle(color: Colors.white),
                       filled: true,
                       fillColor: Colors.white70,
                       enabledBorder: OutlineInputBorder(
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(40.0)),
-                        borderSide: BorderSide(
-                            color: Color(0xFF204C97), width: 2),
-
+                        borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                        borderSide:
+                            BorderSide(color: Color(0xFF204C97), width: 2),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(40.0)),
-                        borderSide: BorderSide(
-                            color: Color(0xFF204C97), width: 2),
+                        borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                        borderSide:
+                            BorderSide(color: Color(0xFF204C97), width: 2),
                       ),
                     ),
                     validator: (value) {
@@ -173,7 +173,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   new TextFormField(
                     controller: email_controller,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.email, ),
+                      prefixIcon: Icon(
+                        Icons.email,
+                      ),
                       labelText: "Email ID",
                       // labelStyle: TextStyle(color: Colors.white),
                       filled: true,
@@ -181,16 +183,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       focusColor: Color(0xFF204C97),
                       // hintStyle: TextStyle(color: Colors.white10),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(40.0)),
-                        borderSide: BorderSide(
-                            color: Color(0xFF204C97), width: 2),
+                        borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                        borderSide:
+                            BorderSide(color: Color(0xFF204C97), width: 2),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(40.0)),
-                        borderSide: BorderSide(
-                            color: Color(0xFF204C97), width: 2),
+                        borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                        borderSide:
+                            BorderSide(color: Color(0xFF204C97), width: 2),
                       ),
                     ),
                     validator: (value) {
@@ -204,8 +204,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   new TextFormField(
                     controller: secretkey_controller,
                     decoration: InputDecoration(
-                      prefixIcon:
-                      Icon(Icons.vpn_key_outlined,),
+                      prefixIcon: Icon(
+                        Icons.vpn_key_outlined,
+                      ),
                       labelText: "Secret Key",
                       //  labelStyle: TextStyle(color: Colors.white),
                       filled: true,
@@ -213,16 +214,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       focusColor: Color(0xFF204C97),
                       // hintStyle: TextStyle(color: Colors.white10),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(40.0)),
-                        borderSide: BorderSide(
-                            color: Color(0xFF204C97), width: 2),
+                        borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                        borderSide:
+                            BorderSide(color: Color(0xFF204C97), width: 2),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(40.0)),
-                        borderSide: BorderSide(
-                            color: Color(0xFF204C97), width: 2),
+                        borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                        borderSide:
+                            BorderSide(color: Color(0xFF204C97), width: 2),
                       ),
                     ),
                     validator: (value) {
@@ -336,8 +335,7 @@ class _SignUpPageState extends State<SignUpPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: new Text(
-              'Invalid Secretkey !'),
+          title: new Text('Invalid Secretkey !'),
           actions: <Widget>[
             TextButton(
               child: new Text("OK"),
@@ -350,6 +348,7 @@ class _SignUpPageState extends State<SignUpPage> {
       },
     );
   }
+
   _showInfo(BuildContext context) {
     showDialog(
       context: context,

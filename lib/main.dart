@@ -58,7 +58,7 @@ class _MyAppState extends State<MyApp> {
       create: (context) => LocationService().locationStream,
       child: MaterialApp(
         //     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'GpsLogger',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

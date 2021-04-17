@@ -1,3 +1,5 @@
+import 'package:db_test3/path_support.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:db_test3/sign_up.dart';
 import 'first_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +10,7 @@ import 'package:flutter/widgets.dart';
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
+  static const String routeName = "/MyHomePage";
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -17,20 +20,26 @@ class _MyHomePageState extends State<MyHomePage> {
   String loginErrorMessage = "";
 
   void verify_user() async {
-    print("login_username_controller = ${login_username_controller.text} "
-        "and login_password_controller = ${login_password_controller.text}");
+    // print("login_username_controller = ${login_username_controller.text} "
+    //     "and login_password_controller = ${login_password_controller.text}");
     var result = await db_helper.verify_userabc(
         login_username_controller.text, login_password_controller.text);
-    print(result);
-    login_username_controller.text = "";
-    login_password_controller.text = "";
-    if (result == 'valid user')
-      Navigator.pushNamed(context, FirstPage.routeName);
-    // if (result == 'valid user') Navigator.pushNamed(context, MyFileList.routeName);
+    // print(result);
+    if (result == 'valid user') {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('username', login_username_controller.text);
+      prefs.setString('userpassword', login_password_controller.text);
+      isLoggedIn = true;
+      // print("context = $context");
+      Navigator.pushNamedAndRemoveUntil(
+          context, FirstPage.routeName, (_) => false);
+    }
     else {
       loginErrorMessage = result;
       _showMessage(context);
     }
+    login_username_controller.text = "";
+    login_password_controller.text = "";
     // else print('invalid user');
     // var dataList = await db_helper.getNoteList(login_username_controller.text);
     // print(dataList);
@@ -47,33 +56,24 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Colors.blueGrey.shade600,
+        backgroundColor: Color(0xFF204C97),
+        // backgroundColor: Color(0xFF204C97),
+        automaticallyImplyLeading: false,
       ),
-      backgroundColor: Colors.blueGrey.shade200,
+      backgroundColor: Colors.blueGrey.shade100,
       // bottomNavigationBar: BottomNavigationBar(
       //   backgroundColor :Colors.blueGrey.shade100,),
       body: SingleChildScrollView(
-        // padding: EdgeInsets.all(1.0),
-        // child: Container(
-        // child: new Container(
-        //   alignment: Alignment.topCenter,
-        //   color: Colors.blueGrey.shade100,
-          // margin: EdgeInsets.all(10.0),
-          // padding: EdgeInsets.all(10.0),
-          // decoration: BoxDecoration(
-          //   color: Colors.blueGrey.shade100,
-            // borderRadius: BorderRadius.circular(14.0),
-          // ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              _logoTop(),
-              // Divider(),
-              SizedBox(height: 30,),
-              _getcard(),
-            ],
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            _logoTop(),
+            // Divider(),
+            SizedBox(height: 30,),
+            _getcard(),
+          ],
         ),
+      ),
       // ),
       // ),
     );
@@ -81,15 +81,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Container _getcard() {
     return new Container(
-      // width: 400,
-      // height: 400,
-      alignment: Alignment.center,
-      margin: EdgeInsets.all(1.0),
-      padding: EdgeInsets.all(1.0),
-      decoration: BoxDecoration(
-        color: Colors.blueGrey.shade200,
-        borderRadius: BorderRadius.circular(14.0),
-      ),
       child: Form(
         key: _formKey,
         // child: Center(
@@ -101,20 +92,24 @@ class _MyHomePageState extends State<MyHomePage> {
               TextFormField(
                 controller: login_username_controller,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.account_circle, color: Colors.white),
+                  prefixIcon: Icon(Icons.account_circle,
+                    //    color: Colors.white
+                  ),
                   labelText: "Username",
-                  labelStyle: TextStyle(color: Colors.white),
+                  filled: true,
+                  fillColor: Colors.white70,
+                  //labelStyle: TextStyle(color: Colors.white),
                   focusColor: Colors.blueGrey.shade600,
                   // hintStyle: TextStyle(color: Colors.white10),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(40.0)),
                     borderSide:
-                        BorderSide(color: Colors.blueGrey.shade400, width: 2),
+                    BorderSide(color:Color(0xFF204C97), width: 2),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(40.0)),
                     borderSide:
-                        BorderSide(color: Colors.blueGrey.shade400, width: 2),
+                    BorderSide(color: Color(0xFF204C97), width: 2),
                   ),
                 ),
                 validator: (value) {
@@ -129,18 +124,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 controller: login_password_controller,
                 decoration: InputDecoration(
                   // icon: Icon(Icons.account_circle),
-                  prefixIcon: Icon(Icons.vpn_key, color: Colors.white),
+                  filled: true,
+                  fillColor: Colors.white70,
+                  prefixIcon: Icon(Icons.vpn_key, ),
+                  //color: Colors.white),
                   labelText: "Password",
-                  labelStyle: TextStyle(color: Colors.white),
+                  //labelStyle: TextStyle(color: Colors.white),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(40.0)),
                     borderSide:
-                        BorderSide(color: Colors.blueGrey.shade400, width: 2),
+                    BorderSide(color: Color(0xFF204C97), width: 2),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(40.0)),
                     borderSide:
-                        BorderSide(color: Colors.blueGrey.shade400, width: 2),
+                    BorderSide(color: Color(0xFF204C97), width: 2),
                   ),
                 ),
                 validator: (value) {
@@ -149,7 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               SizedBox(
-                height: 20,
+                height: 50,
               ),
               SizedBox(
                 width: 300,
@@ -162,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       fontSize: 20,
                     ),
                   ),
-                  backgroundColor: Colors.blueGrey.shade400,
+                  backgroundColor: Color(0xFF204C97),
                   heroTag: null,
                 ),
               ),
@@ -182,7 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       fontSize: 20,
                     ),
                   ),
-                  backgroundColor: Colors.blueGrey.shade400,
+                  backgroundColor: Color(0xFF204C97),
                   heroTag: null,
                 ),
               ),
@@ -222,7 +220,7 @@ class _MyHomePageState extends State<MyHomePage> {
       alignment: Alignment.center,
       // color: Colors.amberAccent,
       decoration: BoxDecoration(
-        color: Colors.blueGrey.shade400,
+        color: Color(0xFF204C97),
         // color: Colors.amberAccent,
         // borderRadius: BorderRadius.all(Radius.circular(10.0)),
         borderRadius: BorderRadius.only(
@@ -237,18 +235,11 @@ class _MyHomePageState extends State<MyHomePage> {
       child: new Container(
         width: 150,
         height: 150,
-        // alignment: Alignment.center,
-        // color: Colors.amberAccent,
-        decoration: BoxDecoration(
-          color: Colors.blueGrey.shade400,
-          // color: Colors.amberAccent,
-          borderRadius: BorderRadius.all(Radius.circular(60.0)),
-          border: Border.all(color: Colors.blueGrey.shade400),
-        ),
         child: FittedBox(
           child: Icon(
             Icons.account_circle_rounded,
             color: Colors.blueGrey.shade100,
+            //  color: Color(0xFF246C8B),
           ),
         ),
       ),

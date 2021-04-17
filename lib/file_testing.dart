@@ -41,7 +41,7 @@ class _ViewPageState extends State<ViewPage> {
   }
 
   sampleFunction() async {
-    print('Clicked');
+    // print('Clicked');
     await OpenFile.open(filePath + selectedItems[0]);
   }
 
@@ -53,14 +53,14 @@ class _ViewPageState extends State<ViewPage> {
 
   void populateData() {
     var _directory = Directory(filePath).path;
-    print('directory = $_directory');
+    // print('directory = $_directory');
     var raw_lista = Directory(_directory).listSync();
-    print(raw_lista);
+    // print(raw_lista);
     list = [];
     for (int i = 0; i < raw_lista.length; i++) {
       list.add(ListItem<String>((raw_lista[i].path).split('/').last));
     }
-    print(list);
+    // print(list);
     // list = [];
     // for (int i = 0; i < 10; i++)
     //   list.add(ListItem<String>("item $i"));
@@ -70,7 +70,17 @@ class _ViewPageState extends State<ViewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("List Selection"),
+        backgroundColor: Color(0xFF204C97),
+        title: Text("Reports"),
+        actions: [
+          IconButton(
+              onPressed: isEnabled ? () => sampleFunction() : null,
+              icon: Icon(Icons.table_view)),
+          IconButton(
+              onPressed: text.isEmpty && selectedItems.isEmpty
+                  ? null : () => _onShare(context),
+              icon: Icon(Icons.share)),
+        ],
       ),
       body: Container(
         child: Stack(
@@ -82,30 +92,39 @@ class _ViewPageState extends State<ViewPage> {
                 itemBuilder: _getListItemTile,
               ),
             ),
-            Container(
-              alignment: Alignment.bottomCenter,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    RaisedButton(
-                      onPressed: isEnabled ? () => sampleFunction() : null,
-                      color: Colors.pinkAccent,
-                      textColor: Colors.white,
-                      padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
-                      child: Text('View'),
-                    ),
-                    RaisedButton(
-                      onPressed: text.isEmpty && selectedItems.isEmpty
-                          ? null
-                          : () => _onShare(context),
-                      color: Colors.green,
-                      textColor: Colors.white,
-                      padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
-                      child: Text('Share'),
-                    ),
-                  ]),
-            ),
+            // SizedBox(
+            //   height: 200,
+            // ),
+            // Container(
+            //   alignment: Alignment.bottomCenter,
+            //   child: Row(
+            //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //       crossAxisAlignment: CrossAxisAlignment.center,
+            //       children: <Widget>[
+            //         RaisedButton.icon(
+            //           onPressed: isEnabled ? () => sampleFunction() : null,
+            //           // color: Colors.pinkAccent,
+            //           icon: Icon(Icons.table_view),
+            //           color: Color(0xFF204C97),
+            //           textColor: Colors.white,
+            //           padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+            //           label: Text('View'),
+            //         ),
+            //         RaisedButton(
+            //           onPressed: text.isEmpty && selectedItems.isEmpty
+            //               ? null
+            //               : () => _onShare(context),
+            //           color: Colors.green,
+            //           textColor: Colors.white,
+            //           padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+            //           child: Text('Share'),
+            //         ),
+            //       ],
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 20,
+            // )
           ],
         ),
       ),
@@ -127,7 +146,7 @@ class _ViewPageState extends State<ViewPage> {
           selectedItems.remove(list[index].data);
           selectedItemsPath.remove(filePath + list[index].data);
         }
-        print(selectedItems);
+        // print(selectedItems);
         if (selectedItems.length == 1) {
           enableViewButton();
         } else {
@@ -139,7 +158,7 @@ class _ViewPageState extends State<ViewPage> {
           list[index].isSelected = true;
           selectedItems.add(list[index].data);
           selectedItemsPath.add(filePath + list[index].data);
-          print(selectedItems);
+          // print(selectedItems);
           if (selectedItems.length == 1) {
             enableViewButton();
           } else {
@@ -149,7 +168,7 @@ class _ViewPageState extends State<ViewPage> {
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 4),
-        color: list[index].isSelected ? Colors.red[100] : Colors.white,
+        color: list[index].isSelected ? Colors.blueAccent[100] : Colors.white,
         child: ListTile(
           title: Text(list[index].data),
         ),
@@ -164,13 +183,6 @@ class _ViewPageState extends State<ViewPage> {
   }
 
   _onShare(BuildContext context) async {
-    // A builder is used to retrieve the context immediately
-    // surrounding the ElevatedButton.
-    //
-    // The context's `findRenderObject` returns the first
-    // RenderObject in its descendent tree when it's not
-    // a RenderObjectWidget. The ElevatedButton's RenderObject
-    // has its position and size after it's built.
     final RenderBox box = context.findRenderObject() as RenderBox;
 
     if (selectedItemsPath.isNotEmpty) {

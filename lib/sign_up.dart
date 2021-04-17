@@ -42,11 +42,11 @@ class _SignUpPageState extends State<SignUpPage> {
       print(userUpdates);
       if(userUpdates == 'updated') {
         userUpdates = "User ${username_controller.text} Updated";
-      username_controller.text= "";
-      password_controller.text = "";
-      email_controller.text = "";
-      secretkey_controller.text = "";
-      _showInfo(context);
+        username_controller.text= "";
+        password_controller.text = "";
+        email_controller.text = "";
+        secretkey_controller.text = "";
+        _showInfo(context);
       }
       if(userUpdates == 'created') {
         userUpdates = "User ${username_controller.text} Created";
@@ -82,9 +82,9 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Colors.blueGrey.shade600,
+        backgroundColor: Color(0xFF204C97),
       ),
-      backgroundColor: Colors.blueGrey.shade200,
+      backgroundColor: Colors.blueGrey.shade100,
       body: new SingleChildScrollView(
         // child: Container(
         //   alignment: Alignment(0.0, 0.0),
@@ -97,192 +97,201 @@ class _SignUpPageState extends State<SignUpPage> {
         //       color: Colors.blueGrey.shade100,
         //       borderRadius: BorderRadius.circular(14.0),
         //     ),
-            child: new Form(
-              key: _formKey,
-              child: Center(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 40, horizontal: 30),
-                  child: new Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      new TextFormField(
-                        // enabled: false,
-                        controller: username_controller,
-                        decoration: InputDecoration(
-                          prefixIcon:
-                              Icon(Icons.account_circle, color: Colors.white),
-                          labelText: "Username",
-                          labelStyle: TextStyle(color: Colors.white),
-                          focusColor: Colors.blueGrey.shade600,
-                          // hintStyle: TextStyle(color: Colors.white10),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(40.0)),
-                            borderSide: BorderSide(
-                                color: Colors.blueGrey.shade400, width: 2),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(40.0)),
-                            borderSide: BorderSide(
-                                color: Colors.blueGrey.shade400, width: 2),
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value.isEmpty) return "Please Enter Username";
-                          return null;
-                        },
+        child: new Form(
+          key: _formKey,
+          child: Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 60, horizontal: 30),
+              child: new Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  new TextFormField(
+                    // enabled: false,
+                    controller: username_controller,
+                    decoration: InputDecoration(
+                      prefixIcon:
+                      Icon(Icons.account_circle,),
+                      labelText: "Username",
+                      //labelStyle: TextStyle(color: Colors.white),
+                      focusColor: Color(0xFF204C97),
+                      filled: true,
+                      fillColor: Colors.white70,
+                      // hintStyle: TextStyle(color: Colors.white10),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(40.0)),
+                        borderSide: BorderSide(
+                            color: Color(0xFF204C97), width: 2),
                       ),
-                      new SizedBox(
-                        height: 20,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(40.0)),
+                        borderSide: BorderSide(
+                            color: Colors.blueGrey.shade400, width: 2),
                       ),
-                      new TextFormField(
-                        controller: password_controller,
-                        decoration: InputDecoration(
-                          // icon: Icon(Icons.account_circle),
-                          prefixIcon: Icon(Icons.vpn_key, color: Colors.white),
-                          labelText: "Password",
-                          labelStyle: TextStyle(color: Colors.white),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(40.0)),
-                            borderSide: BorderSide(
-                                color: Colors.blueGrey.shade400, width: 2),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(40.0)),
-                            borderSide: BorderSide(
-                                color: Colors.blueGrey.shade400, width: 2),
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value.isEmpty) return "Please Enter Password";
-                          return null;
-                        },
-                      ),
-                      new SizedBox(
-                        height: 20,
-                      ),
-                      new TextFormField(
-                        controller: email_controller,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.email, color: Colors.white),
-                          labelText: "Email ID",
-                          labelStyle: TextStyle(color: Colors.white),
-                          focusColor: Colors.blueGrey.shade600,
-                          // hintStyle: TextStyle(color: Colors.white10),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(40.0)),
-                            borderSide: BorderSide(
-                                color: Colors.blueGrey.shade400, width: 2),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(40.0)),
-                            borderSide: BorderSide(
-                                color: Colors.blueGrey.shade400, width: 2),
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value.isEmpty) return "Please Enter Email ID";
-                          return null;
-                        },
-                      ),
-                      new SizedBox(
-                        height: 20,
-                      ),
-                      new TextFormField(
-                        controller: secretkey_controller,
-                        decoration: InputDecoration(
-                          prefixIcon:
-                              Icon(Icons.vpn_key_outlined, color: Colors.white),
-                          labelText: "Secret Key",
-                          labelStyle: TextStyle(color: Colors.white),
-                          focusColor: Colors.blueGrey.shade600,
-                          // hintStyle: TextStyle(color: Colors.white10),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(40.0)),
-                            borderSide: BorderSide(
-                                color: Colors.blueGrey.shade400, width: 2),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(40.0)),
-                            borderSide: BorderSide(
-                                color: Colors.blueGrey.shade400, width: 2),
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value.isEmpty) return "Please Enter Secret Key";
-                          return null;
-                        },
-                      ),
-                      new SizedBox(
-                        height: 20,
-                      ),
-                      new SizedBox(
-                        width: 300,
-                        height: 60,
-                        child: new FloatingActionButton.extended(
-                          onPressed: insert_data,
-                          label: Text(
-                            "Create/Update",
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                          backgroundColor: Colors.blueGrey.shade400,
-                          heroTag: null,
-                        ),
-                      ),
-                      new SizedBox(
-                        height: 20,
-                      ),
-                      new SizedBox(
-                        width: 300,
-                        height: 60,
-                        child: new FloatingActionButton.extended(
-                          onPressed: () async {
-                            await deviceInfo();
-                            _showPartialKey(context);
-                          },
-                          label: Text(
-                            "View App Id",
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                          backgroundColor: Colors.blueGrey.shade400,
-                          heroTag: null,
-                        ),
-                      ),
-                      new SizedBox(
-                        height: 20,
-                      ),
-                      // new SizedBox(
-                      //   width: 300,
-                      //   height: 60,
-                      //   child: new FloatingActionButton.extended(
-                      //     onPressed: queryall,
-                      //     label: Text(
-                      //       "VIEW USERS",
-                      //       style: TextStyle(
-                      //         fontSize: 20,
-                      //       ),
-                      //     ),
-                      //     backgroundColor: Colors.blueGrey.shade400,
-                      //     heroTag: null,
-                      //   ),
-                      // ),
-                    ],
+                    ),
+                    validator: (value) {
+                      if (value.isEmpty) return "Please Enter Username";
+                      return null;
+                    },
                   ),
-                ),
+                  new SizedBox(
+                    height: 20,
+                  ),
+                  new TextFormField(
+                    controller: password_controller,
+                    decoration: InputDecoration(
+                      // icon: Icon(Icons.account_circle),
+                      prefixIcon: Icon(Icons.vpn_key, ),
+                      labelText: "Password",
+                      // labelStyle: TextStyle(color: Colors.white),
+                      filled: true,
+                      fillColor: Colors.white70,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(40.0)),
+                        borderSide: BorderSide(
+                            color: Color(0xFF204C97), width: 2),
+
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(40.0)),
+                        borderSide: BorderSide(
+                            color: Color(0xFF204C97), width: 2),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value.isEmpty) return "Please Enter Password";
+                      return null;
+                    },
+                  ),
+                  new SizedBox(
+                    height: 20,
+                  ),
+                  new TextFormField(
+                    controller: email_controller,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.email, ),
+                      labelText: "Email ID",
+                      // labelStyle: TextStyle(color: Colors.white),
+                      filled: true,
+                      fillColor: Colors.white70,
+                      focusColor: Color(0xFF204C97),
+                      // hintStyle: TextStyle(color: Colors.white10),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(40.0)),
+                        borderSide: BorderSide(
+                            color: Color(0xFF204C97), width: 2),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(40.0)),
+                        borderSide: BorderSide(
+                            color: Color(0xFF204C97), width: 2),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value.isEmpty) return "Please Enter Email ID";
+                      return null;
+                    },
+                  ),
+                  new SizedBox(
+                    height: 20,
+                  ),
+                  new TextFormField(
+                    controller: secretkey_controller,
+                    decoration: InputDecoration(
+                      prefixIcon:
+                      Icon(Icons.vpn_key_outlined,),
+                      labelText: "Secret Key",
+                      //  labelStyle: TextStyle(color: Colors.white),
+                      filled: true,
+                      fillColor: Colors.white70,
+                      focusColor: Color(0xFF204C97),
+                      // hintStyle: TextStyle(color: Colors.white10),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(40.0)),
+                        borderSide: BorderSide(
+                            color: Color(0xFF204C97), width: 2),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(40.0)),
+                        borderSide: BorderSide(
+                            color: Color(0xFF204C97), width: 2),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value.isEmpty) return "Please Enter Secret Key";
+                      return null;
+                    },
+                  ),
+                  new SizedBox(
+                    height: 60,
+                  ),
+                  new SizedBox(
+                    width: 300,
+                    height: 60,
+                    child: new FloatingActionButton.extended(
+                      onPressed: insert_data,
+                      label: Text(
+                        "Create/Update",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      backgroundColor: Color(0xFF204C97),
+                      heroTag: null,
+                    ),
+                  ),
+                  new SizedBox(
+                    height: 20,
+                  ),
+                  new SizedBox(
+                    width: 300,
+                    height: 60,
+                    child: new FloatingActionButton.extended(
+                      onPressed: () async {
+                        await deviceInfo();
+                        _showPartialKey(context);
+                      },
+                      label: Text(
+                        "View App Id",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      backgroundColor: Color(0xFF204C97),
+                      heroTag: null,
+                    ),
+                  ),
+                  new SizedBox(
+                    height: 20,
+                  ),
+                  // new SizedBox(
+                  //   width: 300,
+                  //   height: 60,
+                  //   child: new FloatingActionButton.extended(
+                  //     onPressed: queryall,
+                  //     label: Text(
+                  //       "VIEW USERS",
+                  //       style: TextStyle(
+                  //         fontSize: 20,
+                  //       ),
+                  //     ),
+                  //     backgroundColor: Colors.blueGrey.shade400,
+                  //     heroTag: null,
+                  //   ),
+                  // ),
+                ],
               ),
             ),
+          ),
+        ),
         //   ),
         // ),
       ),

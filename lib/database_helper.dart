@@ -48,19 +48,19 @@ class DataBaseHelper {
   }
 
   Future<String> insert(Map<String, dynamic> row) async {
-    print(row);
+    // print(row);
     Database db = await instance.data_base;
     var res = await db
         .query(table, where: "username = ?", whereArgs: [row['username']]);
-    print("res  = $res");
+    // print("res  = $res");
     if (res.length < 1) {
       var check = await db.insert(table, row);
-      print(check);
+      // print(check);
       return "created";
     } else {
       var check = await update(row['username'], row['userpassword'],
           row['useremail'], row['usersecretkey']);
-      print(check);
+      // print(check);
       return check;
     }
   }
@@ -82,7 +82,7 @@ class DataBaseHelper {
         },
         where: "$columnName = ?",
         whereArgs: [user_name]);
-    print(res);
+    // print(res);
     // return 'User $user_name updated';
     return 'updated';
   }
@@ -91,7 +91,7 @@ class DataBaseHelper {
     Database db = await instance.data_base;
     var res =
         await db.query(table, where: "username = ?", whereArgs: [user_id]);
-    print("res  = $res");
+    // print("res  = $res");
     try {
       if (res.length < 1) return "Invalid Username";
       // res = await db.query(table, where: "userpassword = ?", whereArgs: [user_password]);
@@ -101,13 +101,13 @@ class DataBaseHelper {
       final DateFormat formatter = DateFormat('yyyy-MM-dd');
       final String formatted = formatter.format(now);
       var dateData = formatted.split('-');
-      print(dateData);
+      // print(dateData);
       var keyData =
           (res[0]['usersecretkey']).split('-'); //[yyyy-mm-dd-androidId]
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
       var myAndroidId = androidInfo.androidId;
-      print("myandroidId = ${myAndroidId}");
+      // print("myandroidId = ${myAndroidId}");
       if (myAndroidId == keyData[0]) {
         if (int.parse(keyData[1]) > int.parse(dateData[0])) return "valid user";
         if (int.parse(keyData[1]) == int.parse(dateData[0])) {
@@ -133,7 +133,7 @@ class DataBaseHelper {
 //		var result = await db.rawQuery('SELECT * FROM $noteTable order by $colPriority ASC');
     var result =
         await db.query(table, where: "username = ?", whereArgs: [userName]);
-    print(result);
+    // print(result);
     return result;
     // return result.forEach(row);
   }

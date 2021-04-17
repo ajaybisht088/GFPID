@@ -86,8 +86,10 @@ class _BtMainState extends State<BtMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Bluetooth Serial'),
+        title: const Text('Bluetooth Mode'),
+        backgroundColor: Color(0xFF204C97),
       ),
+      backgroundColor: Colors.blueGrey.shade100,
       body: Container(
         child: ListView(
           children: <Widget>[
@@ -123,7 +125,7 @@ class _BtMainState extends State<BtMain> {
             ),
             ListTile(
               title: RaisedButton(
-                child: const Text('Connect to paired device to chat'),
+                child: const Text('Connect to paired device'),
                 onPressed: () async {
                   final BluetoothDevice selectedDevice =
                       await Navigator.of(context).push(

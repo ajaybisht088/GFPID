@@ -27,7 +27,7 @@ class _ViewPageState extends State<ViewPage> {
   List<String> selectedItems = [];
   List<String> selectedItemsPath = [];
   bool isEnabled = false;
-
+  bool tap =false;
   enableViewButton() {
     setState(() {
       isEnabled = true;
@@ -73,15 +73,19 @@ class _ViewPageState extends State<ViewPage> {
         backgroundColor: Color(0xFF204C97),
         title: Text("Reports"),
         actions: [
+          /*
           IconButton(
               onPressed: isEnabled ? () => sampleFunction() : null,
               icon: Icon(Icons.table_view)),
+
+           */
           IconButton(
               onPressed: text.isEmpty && selectedItems.isEmpty
                   ? null : () => _onShare(context),
               icon: Icon(Icons.share)),
         ],
       ),
+      backgroundColor: Colors.blueGrey.shade100,
       body: Container(
         child: Stack(
           children: <Widget>[
@@ -134,6 +138,13 @@ class _ViewPageState extends State<ViewPage> {
   Widget _getListItemTile(BuildContext context, int index) {
     return GestureDetector(
       onTap: () {
+
+        if (list.any((item)=> item.isSelected) == false) {
+          tap =true;
+          OpenFile.open(filePath + list[index].data);
+
+        }
+
         if (list.any((item) => item.isSelected)) {
           setState(() {
             list[index].isSelected = !list[index].isSelected;
@@ -146,12 +157,15 @@ class _ViewPageState extends State<ViewPage> {
           selectedItems.remove(list[index].data);
           selectedItemsPath.remove(filePath + list[index].data);
         }
+
+
         // print(selectedItems);
         if (selectedItems.length == 1) {
           enableViewButton();
         } else {
           disableViewButton();
         }
+        tap =false;
       },
       onLongPress: () {
         setState(() {
@@ -167,10 +181,12 @@ class _ViewPageState extends State<ViewPage> {
         });
       },
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 4),
-        color: list[index].isSelected ? Colors.blueAccent[100] : Colors.white,
+        margin: EdgeInsets.symmetric(vertical: 4,),
+        color: (list[index].isSelected )? Colors.blueAccent[100] : Colors.white70,
         child: ListTile(
-          title: Text(list[index].data),
+          leading:  Icon(Icons.label_important,color: Color(0xFF204C97),),
+          title: Text(list[index].data,),
+
         ),
       ),
     );

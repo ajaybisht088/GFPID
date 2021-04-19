@@ -272,8 +272,8 @@ class _SecondPageState extends State<SecondPage> {
     if (imgNum == 1) {
       Image1 = await picker.getImage(
         source: imageSource,
-        maxHeight: 2048,
-        maxWidth: 2048,
+    //    maxHeight: 2048,
+     //   maxWidth: 2048,
       );
       if (Image1 != null) {
         // print(Image1.path);

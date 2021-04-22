@@ -55,7 +55,7 @@ class _ChatPage extends State<ChatPage> {
   final picker = ImagePicker();
   int _jumperradioValue, _clradioValue, _lineradioValue, _overlradioValue;
   int _signalradioValue;
-  String _imgOneLocation, _imgTwoLocation, _imgThreeLocation;
+  String _imgOneLocation="", _imgTwoLocation="", _imgThreeLocation="";
   String _lastMastTp;
   SharedPreferences prefs;
   scaff_function(String msg) {
@@ -281,8 +281,8 @@ class _ChatPage extends State<ChatPage> {
 
   var _mastTypeValues = ["None"];
   var _stgrTypeValues = ["None"];
-  var _currentValueSelected;
-  var _currentValueSelected1;
+  var _currentValueSelected="";
+  var _currentValueSelected1="";
   var _directory;
 
   _listofFiles() {
@@ -2002,7 +2002,7 @@ class _ChatPage extends State<ChatPage> {
                                 _jumperradioValue = null;
                                 _signalradioValue = null;
                                 _currentValueSelected= "";
-                                _drop1= null;
+                                _drop1=null;
                                 _drop2= null;
                                 _currentValueSelected1="";
                                 _signal = "";

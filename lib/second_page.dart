@@ -126,8 +126,8 @@ class _SecondPageState extends State<SecondPage> {
 
   var _mastTypeValues = ["None"];
   var _stgrTypeValues = ["None"];
-  var _currentValueSelected;
-  var _currentValueSelected1;
+  var _currentValueSelected="";
+  var _currentValueSelected1="";
   var _directory;
 
   _listofFiles() {

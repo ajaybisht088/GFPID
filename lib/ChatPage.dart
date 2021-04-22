@@ -105,17 +105,20 @@ class _ChatPage extends State<ChatPage> {
       if (!await Directory(myImagePath).exists()) {
         await Directory(myImagePath).create(recursive: true);
       }
+      _temp = _mastTPController.text.replaceAll('/',"_");
       // print('newPath = ${newPath}$folderName');
       if (mastTpNumber == 1) {
+
         if (!await File(
-            '$myImagePath/${_mastTPController.text}_location_${DateTime.now()}.jpg')
+            '$myImagePath/${_temp}_location_${DateTime.now()}.jpg')
             .exists()) {
           await _Image1.copy(
-              '$myImagePath/${_mastTPController.text}_location_${DateTime.now()}.jpg');
+              '$myImagePath/${_temp}_location_${DateTime.now()}.jpg');
         } else {
           await _Image1.copy(
-              '$myImagePath/${_mastTPController.text}_location_${DateTime.now()}.jpg');
+              '$myImagePath/${_temp}_location_${DateTime.now()}.jpg');
         }
+
         setState(() {
           _imgOneLocation =
           '${_mastTPController.text}_location_${DateTime.now()}.jpg';
@@ -124,13 +127,13 @@ class _ChatPage extends State<ChatPage> {
       }
       if (mastTpNumber == 2) {
         if (!await File(
-            '$myImagePath/${_mastTPController.text}_ohe_${DateTime.now()}.jpg')
+            '$myImagePath/${_temp}_ohe_${DateTime.now()}.jpg')
             .exists()) {
           await _Image2.copy(
-              '$myImagePath/${_mastTPController.text}_ohe_${DateTime.now()}.jpg');
+              '$myImagePath/${_temp}_ohe_${DateTime.now()}.jpg');
         } else {
           await _Image2.copy(
-              '$myImagePath/${_mastTPController.text}_ohe_${DateTime.now()}.jpg');
+              '$myImagePath/${_temp}_ohe_${DateTime.now()}.jpg');
         }
         setState(() {
           _imgTwoLocation =
@@ -140,13 +143,13 @@ class _ChatPage extends State<ChatPage> {
       }
       if (mastTpNumber == 3) {
         if (!await File(
-            '$myImagePath/${_mastTPController.text}_other_${DateTime.now()}.jpg')
+            '$myImagePath/${_temp}_other_${DateTime.now()}.jpg')
             .exists()) {
           await _Image3.copy(
-              '$myImagePath/${_mastTPController.text}_other_${DateTime.now()}.jpg');
+              '$myImagePath/${_temp}_other_${DateTime.now()}.jpg');
         } else {
           await _Image3.copy(
-              '$myImagePath/${_mastTPController.text}_other_${DateTime.now()}.jpg');
+              '$myImagePath/${_temp}_other_${DateTime.now()}.jpg');
         }
         setState(() {
           _imgThreeLocation =
@@ -284,7 +287,7 @@ class _ChatPage extends State<ChatPage> {
   var _currentValueSelected="";
   var _currentValueSelected1="";
   var _directory;
-
+  var _temp;
   _listofFiles() {
     _directory = Directory(mastTypePath).path;
     // print('directory = $_directory');
@@ -886,6 +889,7 @@ class _ChatPage extends State<ChatPage> {
                             },
                             onSaved: (String value) {
                               _MastTP = value;
+                              _temp=value ;
                             },
                           ),
                         ),

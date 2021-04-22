@@ -129,7 +129,7 @@ class _SecondPageState extends State<SecondPage> {
   var _currentValueSelected="";
   var _currentValueSelected1="";
   var _directory;
-
+var _temp;
   _listofFiles() {
     _directory = Directory(mastTypePath).path;
     // print('directory = $_directory');
@@ -192,8 +192,8 @@ class _SecondPageState extends State<SecondPage> {
             "Latitude, Longitude, Altitude, Speed, Accuracy, Satellites,"
             "Mast/TP, Mast Type, Line, CL,Jumper,"
             " Overl,STGR,IMP, Height,Signal,"
-            " ENG FEATURE, TRD FEATURE, REMARKS,Line Image 1,"
-            " Line Image 2, LIneImage 3\n $data");
+            " ENG FEATURE, TRD FEATURE, REMARKS,Location Image ,"
+            " OHE Image , Other Image \n $data");
       }
       _lastMastTp = _MastTP;
       prefs.setString('lastMastTp', _lastMastTp);
@@ -212,16 +212,29 @@ class _SecondPageState extends State<SecondPage> {
         await Directory(myImagePath).create(recursive: true);
       }
       // print('newPath = ${newPath}$folderName');
+      _temp = _mastTPController.text.replaceAll('/',"_");
       if (mastTpNumber == 1) {
         if (!await File(
-                '$myImagePath/${_mastTPController.text}_location_${DateTime.now()}.jpg')
+            '$myImagePath/${_temp}_location_${DateTime.now()}.jpg')
             .exists()) {
           await _Image1.copy(
-              '$myImagePath/${_mastTPController.text}_location_${DateTime.now()}.jpg');
+              '$myImagePath/${_temp}_location_${DateTime.now()}.jpg');
         } else {
           await _Image1.copy(
-              '$myImagePath/${_mastTPController.text}_location_${DateTime.now()}.jpg');
+              '$myImagePath/${_temp}_location_${DateTime.now()}.jpg');
         }
+
+
+
+        // if (!await File(
+        //         '$myImagePath/${_mastTPController.text}_location_${DateTime.now()}.jpg')
+        //     .exists()) {
+        //   await _Image1.copy(
+        //       '$myImagePath/${_mastTPController.text}_location_${DateTime.now()}.jpg');
+        // } else {
+        //   await _Image1.copy(
+        //       '$myImagePath/${_mastTPController.text}_location_${DateTime.now()}.jpg');
+        // }
         setState(() {
           _imgOneLocation =
               '${_mastTPController.text}_location_${DateTime.now()}.jpg';
@@ -230,13 +243,13 @@ class _SecondPageState extends State<SecondPage> {
       }
       if (mastTpNumber == 2) {
         if (!await File(
-                '$myImagePath/${_mastTPController.text}_ohe_${DateTime.now()}.jpg')
+                '$myImagePath/${_temp}_ohe_${DateTime.now()}.jpg')
             .exists()) {
           await _Image2.copy(
-              '$myImagePath/${_mastTPController.text}_ohe_${DateTime.now()}.jpg');
+              '$myImagePath/${_temp}_ohe_${DateTime.now()}.jpg');
         } else {
           await _Image2.copy(
-              '$myImagePath/${_mastTPController.text}_ohe_${DateTime.now()}.jpg');
+              '$myImagePath/${_temp}_ohe_${DateTime.now()}.jpg');
         }
         setState(() {
           _imgTwoLocation =
@@ -246,13 +259,13 @@ class _SecondPageState extends State<SecondPage> {
       }
       if (mastTpNumber == 3) {
         if (!await File(
-                '$myImagePath/${_mastTPController.text}_other_${DateTime.now()}.jpg')
+                '$myImagePath/${_temp}_other_${DateTime.now()}.jpg')
             .exists()) {
           await _Image3.copy(
-              '$myImagePath/${_mastTPController.text}_other_${DateTime.now()}.jpg');
+              '$myImagePath/${_temp}_other_${DateTime.now()}.jpg');
         } else {
           await _Image3.copy(
-              '$myImagePath/${_mastTPController.text}_other_${DateTime.now()}.jpg');
+              '$myImagePath/${_temp}_other_${DateTime.now()}.jpg');
         }
         setState(() {
           _imgThreeLocation =
@@ -828,6 +841,7 @@ class _SecondPageState extends State<SecondPage> {
                             },
                             onSaved: (String value) {
                               _MastTP = value;
+
                             },
                           ),
                         ),

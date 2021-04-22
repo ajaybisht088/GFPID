@@ -96,15 +96,15 @@ class _SecondPageState extends State<SecondPage> {
   final GlobalKey<ScaffoldState> _scaffkey = new GlobalKey<ScaffoldState>();
   PickedFile Image1, Image2, Image3;
   File _Image1, _Image2, _Image3;
-  var _line, _otherCl, _cl, _jumper, _otherJumper, _overl, _stgr, _imp, _height;
-  var _signal, _otherSignal, _eng, _MastType, _remarks, _trd, _yard, _MastTP;
+  var _line= "", _cl= "", _jumper= "",  _overl= "", _imp= "", _height= "",_signal= "", _eng,_remarks, _trd,_drop1,_drop2 ;
+  var   _MastTP;
   int _fileNumCount1 = 0, _fileNumCount2 = 0, _fileNumCount3 = 0;
   final _mastTPController = TextEditingController();
 
   final picker = ImagePicker();
   int _jumperradioValue, _clradioValue, _lineradioValue, _overlradioValue;
   int _signalradioValue;
-  String _imgOneLocation, _imgTwoLocation, _imgThreeLocation;
+  String _imgOneLocation= "", _imgTwoLocation= "", _imgThreeLocation= "";
   String _lastMastTp;
   SharedPreferences prefs;
 
@@ -190,8 +190,8 @@ class _SecondPageState extends State<SecondPage> {
       } else {
         await saveFile.writeAsString(
             "Latitude, Longitude, Altitude, Speed, Accuracy, Satellites,"
-            "Mast/TP, Mast Type, Line, Yard(value), CL,Other(CL),Jumper,"
-            " Other(Jumper),Overl,STGR,IMP, Height,Signal,Other(Signal),"
+            "Mast/TP, Mast Type, Line, CL,Jumper,"
+            " Overl,STGR,IMP, Height,Signal,"
             " ENG FEATURE, TRD FEATURE, REMARKS,Line Image 1,"
             " Line Image 2, LIneImage 3\n $data");
       }
@@ -286,8 +286,8 @@ class _SecondPageState extends State<SecondPage> {
     if (imgNum == 2) {
       Image2 = await picker.getImage(
         source: imageSource,
-        maxHeight: 2048,
-        maxWidth: 2048,
+ //       maxHeight: 2048,
+ //       maxWidth: 2048,
       );
       if (Image2 != null) {
         // print(Image2.path);
@@ -300,8 +300,8 @@ class _SecondPageState extends State<SecondPage> {
     if (imgNum == 3) {
       Image3 = await picker.getImage(
         source: imageSource,
-        maxHeight: 2048,
-        maxWidth: 2048,
+  //      maxHeight: 2048,
+  //      maxWidth: 2048,
       );
       if (Image3 != null) {
         // print(Image3.path);
@@ -334,8 +334,8 @@ class _SecondPageState extends State<SecondPage> {
     //data_format = latitude,longitude,altitude,speed,accuracy,filed1,filed2,field3,filed4,field5
     data_write_flag = await save_to_file(
         "${_latitude}, ${_longitude}, ${_altitude}, ${_speed}, $_accuracy, 0,"
-        "$_MastTP, $_currentValueSelected, $_line, $_yard, $_cl,$_otherCl,$_jumper,"
-        "$_otherJumper,$_overl,$_currentValueSelected1,$_imp,$_height,$_signal,$_otherSignal,"
+        "$_MastTP, $_currentValueSelected, $_line, $_cl,$_jumper,"
+        "$_overl,$_currentValueSelected1,$_imp,$_height,$_signal,"
         "$_eng,$_trd,$_remarks, $_imgOneLocation, $_imgTwoLocation, "
         "$_imgThreeLocation\n",
         _fileName() + '.csv');
@@ -361,9 +361,9 @@ class _SecondPageState extends State<SecondPage> {
         case 2:
           _line = "SL";
           break;
-        case 3:
-          _line = "Yard";
-          break;
+      //  case 3:
+      //    _line = "Yard";
+      //    break;
       }
     });
   }
@@ -381,9 +381,7 @@ class _SecondPageState extends State<SecondPage> {
         case 2:
           _cl = "T/CL";
           break;
-        case 3:
-          _cl = "Other";
-          break;
+
       }
     });
   }
@@ -400,9 +398,6 @@ class _SecondPageState extends State<SecondPage> {
           break;
         case 2:
           _jumper = "F";
-          break;
-        case 3:
-          _jumper = "Other";
           break;
       }
     });
@@ -434,9 +429,6 @@ class _SecondPageState extends State<SecondPage> {
           break;
         case 2:
           _signal = "D";
-          break;
-        case 3:
-          _signal = "Other";
           break;
       }
     });
@@ -768,67 +760,7 @@ class _SecondPageState extends State<SecondPage> {
                           ),
                           SizedBox(
                             height: 6,
-                          ),
-                          /*
-                          Container(
-                            //   width: 160,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              // color: Colors.white,
-                            ),
-                            alignment: Alignment.center,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Flexible(
-                                  flex: 1,
-                                  child: Container(
-                                    //   width: 160,
-                                    height: 66,
-                                    alignment: Alignment.center,
-                                    // padding: const EdgeInsets.all(10.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                      children: <Widget>[
-                                        Container(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            "Satellite",
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              color: Color(0xFF204C97),
-                                              fontFamily: 'MyriadPro',
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                        Container(
-                                          alignment: Alignment.center,
-                                          child: //Text("${roundDouble(userLocation?.latitude, 6)}",
-                                          Text(
-                                            (userLocation) != null
-                                                ? '0.0'
-                                                : '0.0',
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-
-                              ],
-                            ),
-                          ),
-
-                           */
+                          )
                         ])),
                 Divider(),
 
@@ -967,9 +899,10 @@ class _SecondPageState extends State<SecondPage> {
                                   onChanged: (String newValueSelected) {
                                     setState(() {
                                       _currentValueSelected = newValueSelected;
+                                      _drop1 = newValueSelected;
                                     });
                                   },
-                                  value: _currentValueSelected,
+                                  value: _drop1
                                   //validator: (value) => value == null ? 'field required' : null,
                                 ),
                               ),
@@ -987,6 +920,7 @@ class _SecondPageState extends State<SecondPage> {
                 SizedBox(
                   height: 12,
                 ),
+                //Line
                 Container(
                   child: Row(
                     // mainAxisSize: MainAxisSize.min,
@@ -1084,7 +1018,11 @@ class _SecondPageState extends State<SecondPage> {
                             ),
                           ),
                           onSaved: (String value) {
-                            _yard = ((_lineradioValue) != 3 ? "N/A" : value);
+                            if(_lineradioValue == 3 ) {
+                            //  print(value);
+                              _line = value;
+
+                            }
                           },
                         ),
                       )
@@ -1097,6 +1035,125 @@ class _SecondPageState extends State<SecondPage> {
                 SizedBox(
                   height: 18,
                 ),
+                //cl
+                Container(
+                  child: Row(
+                    // mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        // alignment: Alignment.center,
+                        // margin: EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.grey,
+                            width: 1,
+                          ),
+                          shape: BoxShape.rectangle,
+                          color: Color(0xFF204C97),
+                        ),
+                        //      height: 24,
+                        //      width: 25,
+                        child: Text(
+                          'CL',
+                          style: new TextStyle(
+                              fontSize: 16.0, color: Colors.white),
+                        ),
+                      ),
+                      new Radio(
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        value: 0,
+                        toggleable: true,
+                        groupValue: _clradioValue,
+                        onChanged: _handleclRadioValueChange,
+                      ),
+                      // Divider(),
+                      new Text(
+                        'S/CL',
+                        style: new TextStyle(fontSize: 12.0),
+                      ),
+                      new Radio(
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        value: 1,
+                        toggleable: true,
+                        groupValue: _clradioValue,
+                        onChanged: _handleclRadioValueChange,
+                      ),
+                      // Divider(),
+                      new Text(
+                        'D/CL',
+                        style: new TextStyle(
+                          fontSize: 12.0,
+                        ),
+                      ),
+                      new Radio(
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        //   splashRadius:4,
+                        value: 2,
+                        toggleable: true,
+                        groupValue: _clradioValue,
+                        onChanged: _handleclRadioValueChange,
+                      ),
+                      // Divider(),
+                      new Text(
+                        'T/CL',
+                        style: new TextStyle(fontSize: 12.0),
+                      ),
+                      new Radio(
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        //    splashRadius:1,
+                        value: 3,
+                        toggleable: true,
+                        groupValue: _clradioValue,
+                        onChanged: _handleclRadioValueChange,
+                      ),
+                      Container(
+//                        height: 26,
+                        width: 60,
+                        alignment: Alignment.center,
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            labelText: "Others",
+                            labelStyle: TextStyle(fontSize: 10),
+                            errorStyle: TextStyle(height: 0),
+                            enabled: ((_clradioValue) != 3 ? false : true),
+                            isDense: true,
+                            contentPadding: new EdgeInsets.symmetric(
+                                vertical: 1.0, horizontal: 2.0),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(1.0),
+                              borderSide: BorderSide(
+                                color: Colors.blueGrey,
+                                width: 2.0,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(1.0)),
+                              borderSide:
+                              BorderSide(color: Colors.blueGrey, width: 2),
+                            ),
+                          ),
+                          onSaved: (String value) {
+                            if(_clradioValue == 3 ) {
+                              //  print(value);
+                              _cl = value;
+
+                            }
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                ), //
+                Divider(
+                  thickness: 2,
+                ),
+                SizedBox(
+                  height: 18,
+                ),
+                // Jumper
                 Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1112,13 +1169,6 @@ class _SecondPageState extends State<SecondPage> {
                           shape: BoxShape.rectangle,
                           color: Color(0xFF204C97),
                         ),
-                        // height: 24,
-                        //     width: 50,
-                        // child: Row(
-                        //   mainAxisSize: MainAxisSize.min,
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   crossAxisAlignment: CrossAxisAlignment.center,
-                        //   children: [
                         child: Text(
                           'Jumper',
                           style: new TextStyle(
@@ -1197,9 +1247,12 @@ class _SecondPageState extends State<SecondPage> {
                             ),
                           ),
                           onSaved: (String value) {
-                            _otherJumper =
-                                ((_jumperradioValue) != 3 ? "N/A" : value);
-                          },
+                            if(_jumperradioValue == 3 ) {
+                              //  print(value);
+                              _jumper = value;
+
+                            }
+                            },
                         ),
                       )
                     ],
@@ -1211,6 +1264,7 @@ class _SecondPageState extends State<SecondPage> {
                 SizedBox(
                   height: 18,
                 ),
+                //Signal
                 Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1310,135 +1364,23 @@ class _SecondPageState extends State<SecondPage> {
                             ),
                           ),
                           onSaved: (String value) {
-                            _otherSignal =
-                                ((_signalradioValue) != 3 ? "N/A" : value);
-//                            _otherSignal = value;
+                                if((_signalradioValue) == 3) {
+                            _signal = value;
+                                }
                           },
                         ),
                       )
                     ],
                   ),
                 ),
+
                 Divider(
                   thickness: 2,
                 ),
                 SizedBox(
                   height: 18,
                 ),
-                Container(
-                  child: Row(
-                    // mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        // alignment: Alignment.center,
-                        // margin: EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.grey,
-                            width: 1,
-                          ),
-                          shape: BoxShape.rectangle,
-                          color: Color(0xFF204C97),
-                        ),
-                        //      height: 24,
-                        //      width: 25,
-                        child: Text(
-                          'CL',
-                          style: new TextStyle(
-                              fontSize: 16.0, color: Colors.white),
-                        ),
-                      ),
-                      new Radio(
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        value: 0,
-                        toggleable: true,
-                        groupValue: _clradioValue,
-                        onChanged: _handleclRadioValueChange,
-                      ),
-                      // Divider(),
-                      new Text(
-                        'S/CL',
-                        style: new TextStyle(fontSize: 12.0),
-                      ),
-                      new Radio(
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        value: 1,
-                        toggleable: true,
-                        groupValue: _clradioValue,
-                        onChanged: _handleclRadioValueChange,
-                      ),
-                      // Divider(),
-                      new Text(
-                        'D/CL',
-                        style: new TextStyle(
-                          fontSize: 12.0,
-                        ),
-                      ),
-                      new Radio(
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        //   splashRadius:4,
-                        value: 2,
-                        toggleable: true,
-                        groupValue: _clradioValue,
-                        onChanged: _handleclRadioValueChange,
-                      ),
-                      // Divider(),
-                      new Text(
-                        'T/CL',
-                        style: new TextStyle(fontSize: 12.0),
-                      ),
-                      new Radio(
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        //    splashRadius:1,
-                        value: 3,
-                        toggleable: true,
-                        groupValue: _clradioValue,
-                        onChanged: _handleclRadioValueChange,
-                      ),
-                      Container(
-//                        height: 26,
-                        width: 60,
-                        alignment: Alignment.center,
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            labelText: "Others",
-                            labelStyle: TextStyle(fontSize: 10),
-                            errorStyle: TextStyle(height: 0),
-                            enabled: ((_clradioValue) != 3 ? false : true),
-                            isDense: true,
-                            contentPadding: new EdgeInsets.symmetric(
-                                vertical: 1.0, horizontal: 2.0),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(1.0),
-                              borderSide: BorderSide(
-                                color: Colors.blueGrey,
-                                width: 2.0,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(1.0)),
-                              borderSide:
-                                  BorderSide(color: Colors.blueGrey, width: 2),
-                            ),
-                          ),
-                          onSaved: (String value) {
-                            _otherCl = ((_clradioValue) != 3 ? "N/A" : value);
-//                            _otherSignal = value;
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                ), //
-                Divider(
-                  thickness: 2,
-                ),
-                SizedBox(
-                  height: 18,
-                ),
+               // overl
                 Container(
                     child: Row(
                         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1540,45 +1482,15 @@ class _SecondPageState extends State<SecondPage> {
                                 onChanged: (String newValueSelected) {
                                   setState(() {
                                     _currentValueSelected1 = newValueSelected;
+                                    _drop2= newValueSelected;
                                   });
                                 },
-                                value: _currentValueSelected1,
+                                value: _drop2,
 
                                 //validator: (value) => value == null ? 'field required' : null,
                               ),
                             ),
                           ),
-
-                          /*
-                        child: TextFormField(
-                          //             textAlign: TextAlign.center ,
-
-                          decoration: InputDecoration(
-                            labelText: "STGR",
-                            labelStyle: TextStyle(fontSize: 10),
-                            errorStyle: TextStyle(height: 0),
-                            contentPadding: new EdgeInsets.symmetric(
-                                vertical: 1.0, horizontal: 2.0),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(1.0),
-                              borderSide: BorderSide(
-                                color: Colors.blueGrey,
-                                width: 2.0,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(1.0)),
-                              borderSide:
-                                  BorderSide(color: Colors.blueGrey, width: 2),
-                            ),
-                          ),
-                          onSaved: (String value) {
-                            _stgr = value;
-                          },
-                        ),
-
-                         */
                         ),
                       ),
                       Flexible(
@@ -1988,10 +1900,14 @@ class _SecondPageState extends State<SecondPage> {
                               // print(" not validated");
                               return;
                             }
+
+
+
                             _formKey.currentState.save();
                             if (await _downloadFile()) {
                               setState(() {
                                 scaff_function("Data Saved");
+                                print(_line);
                                 _formKey.currentState.reset();
                                 _Image1 = null;
                                 Image1 = null;
@@ -1999,19 +1915,24 @@ class _SecondPageState extends State<SecondPage> {
                                 Image2 = null;
                                 _Image3 = null;
                                 Image3 = null;
-                                _mastTPController.text = "";
+                              //  _mastTPController.text = "";
                                 _lineradioValue = null;
-                                _line = null;
-                                _jumper = null;
+                                _line = "";
+                                _jumper = "";
                                 _jumperradioValue = null;
                                 _signalradioValue = null;
-                                _currentValueSelected= null;
-                                _currentValueSelected1= null;
-                                _signal = null;
-                                _cl = null;
+                                _currentValueSelected= "";
+                                _drop1= null;
+                                _drop2= null;
+                                _currentValueSelected1="";
+                                _signal = "";
+                                _cl = "";
                                 _clradioValue = null;
-                                _overl = null;
+                                _overl = "";
                                 _overlradioValue = null;
+                                _imgOneLocation= "";
+                                _imgTwoLocation= "";
+                                _imgThreeLocation= "";
                               });
                             } else {
                               scaff_function("Data not Saved!!!");

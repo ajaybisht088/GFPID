@@ -78,7 +78,7 @@ class _HyGSplashState extends State<HyGSplash> with TickerProviderStateMixin {
                 alignment: Alignment.center,
                 child: Text("Welcome",
                     style: TextStyle(
-                      fontSize: 60,
+                      fontSize: 50,
                       color: Colors.blue,
                       fontFamily: 'MyriadPro',
                       shadows: [
@@ -113,7 +113,7 @@ class _HyGSplashState extends State<HyGSplash> with TickerProviderStateMixin {
                 alignment: Alignment.center,
                 child: Text("INDIAN RAILWAYS",
                     style: TextStyle(
-                      fontSize: 44,
+                      fontSize: 30,
                       color: Colors.blue,
                       fontFamily: 'MyriadPro',
                       shadows: [

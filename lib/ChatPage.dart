@@ -108,49 +108,49 @@ class _ChatPage extends State<ChatPage> {
       // print('newPath = ${newPath}$folderName');
       if (mastTpNumber == 1) {
         if (!await File(
-                '$myImagePath/${_mastTPController.text}-${mastTpNumber}-${_fileNumCount1}.jpg')
+            '$myImagePath/${_mastTPController.text}_location_${DateTime.now()}.jpg')
             .exists()) {
           await _Image1.copy(
-              '$myImagePath/${_mastTPController.text}-${mastTpNumber}-${_fileNumCount1}.jpg');
+              '$myImagePath/${_mastTPController.text}_location_${DateTime.now()}.jpg');
         } else {
           await _Image1.copy(
-              '$myImagePath/${_mastTPController.text}-${mastTpNumber}-${_fileNumCount1++}.jpg');
+              '$myImagePath/${_mastTPController.text}_location_${DateTime.now()}.jpg');
         }
         setState(() {
           _imgOneLocation =
-              '${_fileName()}/${_mastTPController.text}-${mastTpNumber}-${_fileNumCount1}.jpg';
+          '${_mastTPController.text}_location_${DateTime.now()}.jpg';
         });
         // print("_imgOneLocation = $_imgOneLocation");
       }
       if (mastTpNumber == 2) {
         if (!await File(
-                '$myImagePath/${_mastTPController.text}-${mastTpNumber}-${_fileNumCount2}.jpg')
+            '$myImagePath/${_mastTPController.text}_ohe_${DateTime.now()}.jpg')
             .exists()) {
           await _Image2.copy(
-              '$myImagePath/${_mastTPController.text}-${mastTpNumber}-${_fileNumCount2}.jpg');
+              '$myImagePath/${_mastTPController.text}_ohe_${DateTime.now()}.jpg');
         } else {
           await _Image2.copy(
-              '$myImagePath/${_mastTPController.text}-${mastTpNumber}-${_fileNumCount2++}.jpg');
+              '$myImagePath/${_mastTPController.text}_ohe_${DateTime.now()}.jpg');
         }
         setState(() {
           _imgTwoLocation =
-              '${_fileName()}/${_mastTPController.text}-${mastTpNumber}-${_fileNumCount2}.jpg';
+          '${_mastTPController.text}_ohe_${DateTime.now()}.jpg';
         });
         // print("_imgTwoLocation = $_imgTwoLocation");
       }
       if (mastTpNumber == 3) {
         if (!await File(
-                '$myImagePath/${_mastTPController.text}-${mastTpNumber}-${_fileNumCount3}.jpg')
+            '$myImagePath/${_mastTPController.text}_other_${DateTime.now()}.jpg')
             .exists()) {
           await _Image3.copy(
-              '$myImagePath/${_mastTPController.text}-${mastTpNumber}-${_fileNumCount3}.jpg');
+              '$myImagePath/${_mastTPController.text}_other_${DateTime.now()}.jpg');
         } else {
           await _Image3.copy(
-              '$myImagePath/${_mastTPController.text}-${mastTpNumber}-${_fileNumCount3++}.jpg');
+              '$myImagePath/${_mastTPController.text}_other_${DateTime.now()}.jpg');
         }
         setState(() {
           _imgThreeLocation =
-              '${_fileName()}/${_mastTPController.text}-${mastTpNumber}-${_fileNumCount3++}.jpg';
+          '${_mastTPController.text}_other_${DateTime.now()}.jpg';
         });
         // print("_imgThreeLocation = $_imgThreeLocation");
       }

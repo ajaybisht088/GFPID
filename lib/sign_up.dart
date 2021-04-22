@@ -25,8 +25,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Future<void> deviceInfo() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-    encodedAndroidId =
-        stringToBase64.encode(stringToBase64.encode(androidInfo.androidId));
+    encodedAndroidId = stringToBase64.encode(androidInfo.androidId);
     print(encodedAndroidId);
   }
 

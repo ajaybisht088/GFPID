@@ -129,7 +129,7 @@ class _SecondPageState extends State<SecondPage> {
   var _currentValueSelected="";
   var _currentValueSelected1="";
   var _directory;
-var _temp;
+  var _temp;
   _listofFiles() {
     _directory = Directory(mastTypePath).path;
     // print('directory = $_directory');

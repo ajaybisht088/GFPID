@@ -41,6 +41,7 @@ dependencies:
 #  gallery_saver: ^2.0.3
 
   flutter_bluetooth_serial: ^0.2.2
+  simple_autocomplete_formfield: ^0.3.0
   scoped_model: ^1.1.0
   camera: ^0.8.1
   video_player: ^2.1.0

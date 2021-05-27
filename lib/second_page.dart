@@ -1969,6 +1969,48 @@ class _SecondPageState extends State<SecondPage> {
                             style: TextStyle(fontSize: 20),
                           ),
                           onPressed: () async {
+    if (!_formKey.currentState.validate()) {
+    // print(" not validated");
+    return;
+    }
+
+
+
+    _formKey.currentState.save();
+    if (await _downloadFile()) {
+    setState(() {
+    scaff_function("Data Saved");
+    print(_line);
+    _formKey.currentState.reset();
+    _Image1 = null;
+    Image1 = null;
+    _Image2 = null;
+    Image2 = null;
+    _Image3 = null;
+    Image3 = null;
+    //  _mastTPController.text = "";
+    _lineradioValue = null;
+    _line = "";
+    _jumper = "";
+    _jumperradioValue = null;
+    _signalradioValue = null;
+    _currentValueSelected= "";
+    _drop1= null;
+    _drop2= null;
+    _currentValueSelected1="";
+    _signal = "";
+    _cl = "";
+    _clradioValue = null;
+    _overl = "";
+    _overlradioValue = null;
+    _imgOneLocation= "";
+    _imgTwoLocation= "";
+    _imgThreeLocation= "";
+    });
+    } else {
+    scaff_function("Data not Saved!!!");
+    }
+
                             _showPartialKey(context);
                           },
                         ),

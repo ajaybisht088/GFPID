@@ -35,7 +35,8 @@ dependencies:
   http: ^0.13.1
   google_fonts: ^2.0.0
   share: ^2.0.1
-  open_file: ^3.1.0
+  open_file: ^3.2.1
+  file_picker_cross: ^4.4.2
   image_picker: ^0.7.3
   path: ^1.8.0
 #  gallery_saver: ^2.0.3

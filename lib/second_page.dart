@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+//import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
@@ -16,7 +17,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'first_page.dart';
 import 'login.dart';
 import 'path_support.dart';
-
+//import 'package:flutter_file_manager/flutter_file_manager.dart';
 // String newPath = "";
 // String fileName = "";
 
@@ -130,11 +131,24 @@ class _SecondPageState extends State<SecondPage> {
   var _currentValueSelected1="";
   var _directory;
   var _temp;
-  _listofFiles() {
+  _listofFiles() async {
     _directory = Directory(mastTypePath).path;
-    // print('directory = $_directory');
+    // var files = await FileManager(root: _directory).walk().toList();
+    //
+    // for(var i = 0;i<files.length;i++) {
+    //   print("${files[i].path} ");
+    // }
+
+  //  List<String> paths = await FilePickerCross.listInternalFiles();
+   // print(paths);
+
+// open an existing file
+  //  FilePickerCross anotherFile = FilePickerCross.fromInternalPath(paths[0]);
+
+
+     print('directory = $_directory');
     List raw_lista = Directory(_directory).listSync();
-    // print(raw_lista);
+     print(raw_lista);
     File file = new File(raw_lista[0].path);
     Future<String> futureContent = file.readAsString();
     // futureContent.then((c) {
